@@ -53,14 +53,14 @@ export class MainComponent implements OnInit {
 
   editTask(task:Task):void {
     this.addTaskValue = task.task_name;
-    this.updateTaskID = task.id;
+    this.updateTaskID = task.$id;
     this.isEditable = true;
     this.ngOnInit();
   }
 
   updateTask() {
     this.taskObject = new Task(this.updateTaskID,this.addTaskValue,false);
-    const isPresent:any = this.taskArray.map(task => task.id === this.taskObject.id? this.taskObject : task);
+    const isPresent:any = this.taskArray.map(task => task.$id === this.taskObject.$id? this.taskObject : task);
     this.storage.setLocalStoreage(this.STORAGE_NAME,isPresent);
     this.addTaskValue = '';
     this.updateTaskID = '';
@@ -68,14 +68,14 @@ export class MainComponent implements OnInit {
   }
 
   deleteTask(taskItem: Task) {
-    const restTask = this.taskArray.filter(task => task.id != taskItem.id)
+    const restTask = this.taskArray.filter(task => task.$id != taskItem.$id)
     this.storage.setLocalStoreage(this.STORAGE_NAME,restTask);
     this.ngOnInit();
   }
 
   isCompletedTask(taskItem: Task): void {
-    this.taskObject = new Task(taskItem.id,taskItem.task_name,true);
-    const isPresent = this.taskArray.map(task => task.id === this.taskObject.id?this.taskObject:task);
+    this.taskObject = new Task(taskItem.$id,taskItem.task_name,true);
+    const isPresent = this.taskArray.map(task => task.$id === this.taskObject.$id?this.taskObject:task);
     this.storage.setLocalStoreage(this.STORAGE_NAME,isPresent);
     this.ngOnInit();
   }
