@@ -10,6 +10,9 @@
     "json-server": "json-server --watch db.json",
     "lint": "npx eslint . --ext .ts"
   },
+  "overrides": {
+    "@babel/traverse": "7.22.8"
+  },
   "private": true,
   "dependencies": {
     "@angular/animations": "^16.2.0",
